@@ -20,7 +20,7 @@ namespace Sitecore.Demo.Edge.Website.Pipelines
         /// <param name="args">The args.</param>
         public override void Process(GetItemArgs args)
         {
-            if (args.Language == null)
+            if (args.Language == null || args.Language.Name=="")
             {
                 Log.Warn($"-------------{args.ItemId} #25", this); return;
             }
