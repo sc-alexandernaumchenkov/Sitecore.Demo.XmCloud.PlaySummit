@@ -89,6 +89,7 @@
     <Compile Include="FieldSerializer\DemoImageFieldSerializer.cs" />
     <Compile Include="FieldSerializer\GetDemoImageFieldSerializer.cs" />
     <Compile Include="FieldMapping\DemoFieldTypeFactoryStore.cs" />
+    <Compile Include="Pipelines\GetLanguageFallbackItem.cs" />
     <Compile Include="Pipelines\LoadBalancingSchemeFix.cs" />
     <Compile Include="Pipelines\PublishSyncedItem.cs" />
     <Compile Include="Pipelines\DemoCmpFieldMapping.cs" />
