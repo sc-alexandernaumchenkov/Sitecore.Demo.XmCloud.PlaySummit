@@ -20,10 +20,14 @@ namespace Sitecore.Demo.Edge.Website.Pipelines
         /// <param name="args">The args.</param>
         public override void Process(GetItemArgs args)
         {
+            if (args.Language == null)
+            {
+                Log.Warn($"-------------{args.ItemId} #25", this); return;
+            }
             var switcherValue = LanguageFallbackItemSwitcher.CurrentValue;
             if ((switcherValue == false || !args.AllowLanguageFallback) && switcherValue != true)
             {
-                Log.Warn($"-------------{args.ItemId} #26: switcherValue={switcherValue} args.AllowLanguageFallback={args.AllowLanguageFallback}", this);
+                Log.Warn($"-------------{args.ItemId} #30: switcherValue={switcherValue} args.AllowLanguageFallback={args.AllowLanguageFallback}", this);
                 return;
             }
 
@@ -40,7 +44,7 @@ namespace Sitecore.Demo.Edge.Website.Pipelines
 
             if (item == null || !item.LanguageFallbackEnabled)
             {
-                Log.Warn($"-------------{args.ItemId} #43: item={item}", this);
+                Log.Warn($"-------------{args.ItemId} #47: item={item}", this);
                 return;
             }
 
@@ -50,27 +54,27 @@ namespace Sitecore.Demo.Edge.Website.Pipelines
             var fallbackLanguage = args.Language;
             while (fallbackItem != null && (!fallbackItem.Name.StartsWith("__") || StandardValuesManager.IsStandardValuesHolder(fallbackItem)) && fallbackItem.RuntimeSettings.TemporaryVersion)
             {
-                Log.Warn($"-------------{args.ItemId} #53: fallbackItem.ID={fallbackItem.ID} fallbackItem.Name={fallbackItem.Name} StandardValuesManager.IsStandardValuesHolder(fallbackItem)={StandardValuesManager.IsStandardValuesHolder(fallbackItem)} " +
+                Log.Warn($"-------------{args.ItemId} #57: fallbackItem.ID={fallbackItem.ID} fallbackItem.Name={fallbackItem.Name} StandardValuesManager.IsStandardValuesHolder(fallbackItem)={StandardValuesManager.IsStandardValuesHolder(fallbackItem)} " +
                     $"fallbackItem.RuntimeSettings.TemporaryVersion={fallbackItem.RuntimeSettings.TemporaryVersion}", this);
                 usedLanguages.Add(fallbackLanguage);
 
                 fallbackLanguage = LanguageFallbackManager.GetFallbackLanguage(fallbackLanguage, args.Database);
 
-                Log.Warn($"-------------{args.ItemId} #59: fallbackLanguage={LanguageFallbackManager.GetFallbackLanguage(fallbackLanguage, args.Database)}", this);
+                Log.Warn($"-------------{args.ItemId} #63: fallbackLanguage={LanguageFallbackManager.GetFallbackLanguage(fallbackLanguage, args.Database)}", this);
                 if (fallbackLanguage == null || usedLanguages.Contains(fallbackLanguage))
                 {
-                    Log.Warn($"-------------{args.ItemId} #62", this);
+                    Log.Warn($"-------------{args.ItemId} #66", this);
                     return;
                 }
 
                 fallbackItem = args.FallbackProvider.GetItem(fallbackItem.ID, fallbackLanguage, Sitecore.Data.Version.Latest, args.Database, args.SecurityCheck);
-                Log.Warn($"-------------{args.ItemId} #67: fallbackItem.ID={fallbackItem.ID} fallbackItem.Name={fallbackItem.Name} StandardValuesManager.IsStandardValuesHolder(fallbackItem)={StandardValuesManager.IsStandardValuesHolder(fallbackItem)} " +
+                Log.Warn($"-------------{args.ItemId} #71: fallbackItem.ID={fallbackItem.ID} fallbackItem.Name={fallbackItem.Name} StandardValuesManager.IsStandardValuesHolder(fallbackItem)={StandardValuesManager.IsStandardValuesHolder(fallbackItem)} " +
                     $"fallbackItem.RuntimeSettings.TemporaryVersion={fallbackItem.RuntimeSettings.TemporaryVersion}", this);
             }
 
             if (fallbackItem == null || fallbackLanguage == args.Language)
             {
-                Log.Warn($"-------------{args.ItemId} #73: fallbackLanguage={fallbackLanguage} args.Language={args.Language}", this);
+                Log.Warn($"-------------{args.ItemId} #77: fallbackLanguage={fallbackLanguage} args.Language={args.Language}", this);
                 return;
             }
 
@@ -81,7 +85,7 @@ namespace Sitecore.Demo.Edge.Website.Pipelines
                 OriginalLanguage = fallbackItem.Language
             };
 
-            Log.Warn($"-------------{args.ItemId} #84: stubItem.OriginalLanguage={stubItem.OriginalLanguage}", this);
+            Log.Warn($"-------------{args.ItemId} #88: stubItem.OriginalLanguage={stubItem.OriginalLanguage}", this);
 
             args.Result = stubItem;
         }
