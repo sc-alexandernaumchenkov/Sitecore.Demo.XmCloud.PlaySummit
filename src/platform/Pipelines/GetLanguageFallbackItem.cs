@@ -24,7 +24,7 @@ namespace Sitecore.Demo.Edge.Website.Pipelines
             {
                 Log.Warn($"-------------{args.ItemId} #25", this); return;
             }
-            var switcherValue = LanguageFallbackItemSwitcher.CurrentValue;
+            var switcherValue = LanguageFallbackItemSwitcher.CurrentValue; Log.Warn($"-------------{args.ItemId} #27: args.Language.Name={args.Language.Name}", this);
             if ((switcherValue == false || !args.AllowLanguageFallback) && switcherValue != true)
             {
                 Log.Warn($"-------------{args.ItemId} #30: switcherValue={switcherValue} args.AllowLanguageFallback={args.AllowLanguageFallback}", this);
@@ -60,7 +60,7 @@ namespace Sitecore.Demo.Edge.Website.Pipelines
 
                 fallbackLanguage = LanguageFallbackManager.GetFallbackLanguage(fallbackLanguage, args.Database);
 
-                Log.Warn($"-------------{args.ItemId} #63: fallbackLanguage={LanguageFallbackManager.GetFallbackLanguage(fallbackLanguage, args.Database)}", this);
+                Log.Warn($"-------------{args.ItemId} #63: fallbackLanguage={fallbackLanguage}", this);
                 if (fallbackLanguage == null || usedLanguages.Contains(fallbackLanguage))
                 {
                     Log.Warn($"-------------{args.ItemId} #66", this);
