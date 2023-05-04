@@ -77,6 +77,7 @@
     <Content Include="Utilities\ClearAllCaches.aspx" />
     <Content Include="Utilities\IndexRebuild.aspx" />
     <Content Include="Utilities\Restart.aspx" />
+    <Content Include="custombin\Sitecore.Kernel.dll" />
     <Content Include="App_Config\Include\Sitecore.Demo.CustomFields.config" />
     <Content Include="App_Config\Include\Sitecore.Demo.SerializeDepth.config" />
     <Content Include="xdts\Web.config.xdt" />
